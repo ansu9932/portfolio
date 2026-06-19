@@ -20953,3 +20953,214 @@ form input.has-error,
 form textarea.has-error {
   border-bottom: 1px solid #ff5a5a;
 }
+
+
+/* ==========================================================================
+   PROFESSIONAL PORTFOLIO HOME — custom sections (.pf-*)
+   Mobile-first, fully fluid. Root: 1rem = 10px. Tokens: var(--t-*), var(--accent)
+   ========================================================================== */
+
+/* ---- Global responsive safety net (prevents horizontal scroll on phones) -- */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, svg, video { max-width: 100%; height: auto; }
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ============================ HERO ============================ */
+.pf-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1.6rem, 3vw, 2.8rem);
+  padding: clamp(2rem, 6vw, 6rem) 0 clamp(1rem, 3vw, 2rem);
+}
+.pf-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 1.6rem;
+  border: 1px solid var(--st-medium);
+  border-radius: 50px;
+  font: 500 1.3rem/1 var(--_font-accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--t-bright);
+}
+.pf-dot {
+  width: 0.9rem; height: 0.9rem; border-radius: 50%;
+  background: #29d27a;
+  box-shadow: 0 0 0 0 rgba(41, 210, 122, 0.6);
+  animation: pf-pulse 1.8s infinite;
+}
+@keyframes pf-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(41, 210, 122, 0.55); }
+  70%  { box-shadow: 0 0 0 1rem rgba(41, 210, 122, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(41, 210, 122, 0); }
+}
+.pf-hero__eyebrow {
+  margin: 0;
+  font: 500 clamp(1.4rem, 2.2vw, 1.8rem)/1.4 var(--_font-accent);
+  color: var(--t-medium);
+}
+.pf-hero__title {
+  margin: 0;
+  max-width: 16ch;
+  font-family: var(--_font-default);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--t-bright);
+  font-size: clamp(3.8rem, 9vw, 11rem);
+}
+.pf-hero__lead {
+  max-width: 56ch;
+}
+.pf-hero__lead p {
+  margin: 0;
+  font: 400 clamp(1.6rem, 2.4vw, 2.1rem)/1.6 var(--_font-default);
+  color: var(--t-medium);
+}
+.pf-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: 0.6rem;
+}
+
+/* ============================ ABOUT ============================ */
+.pf-about__text {
+  margin: 0 0 clamp(3rem, 5vw, 5rem);
+}
+.pf-about__text span { color: var(--t-medium); }
+.pf-facts {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.pf-facts li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--st-medium);
+}
+.pf-facts li:last-child { border-bottom: 1px solid var(--st-medium); }
+.pf-facts__num {
+  font: 600 clamp(2.8rem, 5vw, 4.2rem)/1 var(--_font-default);
+  color: var(--accent);
+  min-width: 9rem;
+}
+.pf-facts__label {
+  font: 400 clamp(1.5rem, 2vw, 1.8rem)/1.4 var(--_font-default);
+  color: var(--t-medium);
+}
+
+/* ============================ SELECTED WORK ============================ */
+.pf-worktitle { align-items: flex-end; row-gap: 2rem; margin-bottom: clamp(2.4rem, 4vw, 4rem); }
+.pf-worktitle__cta { display: flex; align-items: flex-end; }
+@media (min-width: 1200px) { .pf-worktitle__cta { justify-content: flex-end; } }
+
+.pf-works { gap: clamp(2.4rem, 4vw, 4rem) 0; }
+.pf-work {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+@media (min-width: 992px) {
+  /* add a horizontal gutter between the two columns */
+  .pf-works > [class*="col-"]:nth-child(odd)  { padding-right: clamp(1.2rem, 1.5vw, 2rem); }
+  .pf-works > [class*="col-"]:nth-child(even) { padding-left: clamp(1.2rem, 1.5vw, 2rem); }
+}
+.pf-work__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.6rem;
+  aspect-ratio: 16 / 11;
+  background: var(--base-tint);
+}
+.pf-work__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.23, 0.65, 0.74, 1.09);
+}
+.pf-work:hover .pf-work__media img { transform: scale(1.05); }
+.pf-work__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.8rem 0.4rem 0;
+}
+.pf-work__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+.pf-work__name {
+  margin: 0;
+  font: 600 clamp(2rem, 3vw, 2.8rem)/1.2 var(--_font-default);
+  color: var(--t-bright);
+  transition: color var(--_animspeed-medium) ease;
+}
+.pf-work:hover .pf-work__name { color: var(--accent); }
+.pf-work__year {
+  font: 500 1.4rem/1 var(--_font-accent);
+  color: var(--t-muted);
+  white-space: nowrap;
+}
+.pf-work__tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+/* ============================ EXPERTISE / SERVICES ============================ */
+.pf-services { list-style: none; margin: 0; padding: 0; }
+.pf-service {
+  display: flex;
+  gap: clamp(1.6rem, 3vw, 3.2rem);
+  padding: clamp(2.4rem, 4vw, 3.6rem) 0;
+  border-top: 1px solid var(--st-medium);
+  transition: padding-left var(--_animspeed-medium) ease;
+}
+.pf-service:last-child { border-bottom: 1px solid var(--st-medium); }
+.pf-service:hover { padding-left: 1.2rem; }
+.pf-service__no {
+  font: 500 1.5rem/1.4 var(--_font-accent);
+  color: var(--accent);
+  min-width: 4rem;
+}
+.pf-service__title {
+  margin: 0 0 0.8rem;
+  font: 600 clamp(2.2rem, 3.4vw, 3.2rem)/1.1 var(--_font-default);
+  color: var(--t-bright);
+}
+.pf-service__text {
+  margin: 0;
+  max-width: 60ch;
+  font: 400 clamp(1.5rem, 2vw, 1.8rem)/1.6 var(--_font-default);
+  color: var(--t-medium);
+}
+
+/* ============================ PRICING CENTER TITLE ============================ */
+.pf-center-title { text-align: center; }
+.pf-center-title h2 { margin: 0 auto; }
+
+/* ============================ RESPONSIVE TWEAKS ============================ */
+@media (min-width: 768px) {
+  .pf-facts { grid-template-columns: repeat(3, 1fr); }
+  .pf-facts li { flex-direction: column; gap: 0.6rem; border: 0; padding: 0; }
+  .pf-facts li:last-child { border: 0; }
+}
+@media (max-width: 767px) {
+  .pf-hero { padding-top: 3rem; }
+  .pf-hero__actions { width: 100%; }
+  .pf-hero__actions .btn { width: 100%; justify-content: center; }
+  .pf-work__head { flex-direction: column; gap: 0.4rem; }
+  .pf-service { gap: 1.2rem; }
+  .pf-service__no { min-width: 3rem; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pf-dot { animation: none; }
+  .pf-work__media img { transition: none; }
+}
