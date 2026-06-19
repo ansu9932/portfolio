@@ -1,0 +1,54 @@
+# ============================================================
+#  Ansuman Sahoo portfolio — Apache config for Hostinger
+# ============================================================
+
+# --- Default document ---------------------------------------
+DirectoryIndex index.html index.php
+
+# --- Protect sensitive files --------------------------------
+# Block direct access to the credentials file and config template.
+<FilesMatch "^(config\.php|config\.example\.php)$">
+  Require all denied
+</FilesMatch>
+
+# Block access to the PHP mailer library folder.
+RedirectMatch 403 ^/lib/.*$
+
+# Hide dotfiles (.gitignore, .htaccess, etc.)
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# --- Security headers ---------------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# --- Pretty-ish URLs: allow /contact -> contact.html --------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # If request isn't a real file/dir and a .html version exists, serve it.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+# --- Caching for static assets ------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 30 days"
+</IfModule>
+
+# --- Compression --------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
