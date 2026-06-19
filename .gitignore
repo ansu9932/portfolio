@@ -1,0 +1,10 @@
+# Live secrets — never commit (contains the mailbox password)
+config.php
+
+# Local / OS junk
+.DS_Store
+Thumbs.db
+
+# Rate-limit + log scratch files (if created locally)
+mxd_rl_*.json
+*.log
